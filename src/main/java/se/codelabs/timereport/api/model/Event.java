@@ -1,7 +1,6 @@
 package se.codelabs.timereport.api.model;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.*;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.annotation.Id;
 
 import javax.validation.constraints.NotNull;
@@ -14,8 +13,7 @@ public class Event implements Serializable {
     private static final long serialVersionUID = 10L;
 
     @Id
-    @DynamoDBIgnore
-    private EventId eventId;
+    private EventId id;
 
     @NotNull
     private String userId;
@@ -38,22 +36,22 @@ public class Event implements Serializable {
 
     @DynamoDBHashKey(attributeName = "user_id")
     public String getUserId() {
-        return eventId != null ? eventId.getUserId() : null;
+        return id != null ? id.getUserId() : null;
     }
     public void setUserId(String userId) {
-        if(eventId == null) eventId = new EventId();
-        eventId.setUserId(userId);
+        if(id == null) id = new EventId();
+        id.setUserId(userId);
     }
 
 
     @DynamoDBRangeKey(attributeName = "event_date")
     public String getEventDate() {
-        return eventId != null ? eventId.getEventDate() : null;
+        return id != null ? id.getEventDate() : null;
     }
 
     public void setEventDate(String eventDate) {
-        if(eventId == null) eventId = new EventId();
-        eventId.setEventDate(eventDate);
+        if(id == null) id = new EventId();
+        id.setEventDate(eventDate);
     }
 
 
