@@ -8,10 +8,10 @@ import java.io.Serializable;
 public class EventId implements Serializable {
     private static final long serialVersionUID = 10L;
 
-    @DynamoDBHashKey(attributeName = "user_id")
+    @DynamoDBHashKey(attributeName = "userid")
     private String userId;
 
-    @DynamoDBRangeKey(attributeName = "event_date")
+    @DynamoDBRangeKey(attributeName = "eventdate")
     private String eventDate;
 
     public EventId() {}

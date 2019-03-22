@@ -13,7 +13,7 @@ public class Event implements Serializable {
     private static final long serialVersionUID = 10L;
 
     @Id
-    private EventId id;
+    private EventId eventId;
 
     @NotNull
     private String userId;
@@ -29,33 +29,35 @@ public class Event implements Serializable {
     public Event(String userId, String userName, String reason, String eventDate, int hours) {
         this.userId = userId;
         this.userName = userName;
+//        this.eventId.setEventDate(eventDate);
+//        this.eventId.setUserId(userId);
         this.reason = reason;
         this.eventDate = eventDate;
         this.hours = hours;
     }
 
-    @DynamoDBHashKey(attributeName = "user_id")
+    @DynamoDBHashKey(attributeName = "userid")
     public String getUserId() {
-        return id != null ? id.getUserId() : null;
+        return eventId != null ? eventId.getUserId() : null;
     }
     public void setUserId(String userId) {
-        if(id == null) id = new EventId();
-        id.setUserId(userId);
+        if(eventId == null) eventId = new EventId();
+        eventId.setUserId(userId);
     }
 
 
-    @DynamoDBRangeKey(attributeName = "event_date")
+    @DynamoDBRangeKey(attributeName = "eventdate")
     public String getEventDate() {
-        return id != null ? id.getEventDate() : null;
+        return eventId != null ? eventId.getEventDate() : null;
     }
 
     public void setEventDate(String eventDate) {
-        if(id == null) id = new EventId();
-        id.setEventDate(eventDate);
+        if(eventId == null) eventId = new EventId();
+        eventId.setEventDate(eventDate);
     }
 
 
-    @DynamoDBAttribute(attributeName = "user_name")
+    @DynamoDBAttribute(attributeName = "username")
     public String getUserName() {
         return userName;
     }

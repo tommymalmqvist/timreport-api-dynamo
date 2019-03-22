@@ -9,8 +9,8 @@ import se.codelabs.timereport.api.model.EventId;
 import java.util.List;
 
 @EnableScan
-public interface EventRepository extends CrudRepository<Event, String> {
+public interface EventRepository extends CrudRepository<Event, EventId> {
 
-    List<Event> findById(EventId id);
+    List<Event> findByEventId(EventId id);
 
 }
