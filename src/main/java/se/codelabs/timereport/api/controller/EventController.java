@@ -16,7 +16,12 @@ public class EventController {
         this.repository = repository;
     }
 
-    @PostMapping("/events")
+    @GetMapping("/events")
+    public String eventRoot() {
+        return "{\"name\": \"events api\", \"version\": 0.1}";
+    }
+
+    @PostMapping(path = "/events", consumes = "application/json", produces = "application/json")
     Event newEvent(@RequestBody Event newEvent) {
         return repository.save(newEvent);
     }
