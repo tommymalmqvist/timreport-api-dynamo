@@ -7,24 +7,15 @@ table = dynamodb.create_table(
     TableName='Event',
     KeySchema=[
         {
-            'AttributeName': 'userid',
+            'AttributeName': 'id',
             'KeyType': 'HASH'  #Partition key
-        },
-        {
-            'AttributeName': 'date',
-            'KeyType': 'RANGE'  #Sort key
         }
     ],
     AttributeDefinitions=[
         {
-            'AttributeName': 'userid',
-            'AttributeType': 'S'
-        },
-        {
-            'AttributeName': 'date',
+            'AttributeName': 'id',
             'AttributeType': 'S'
         }
-
     ],
     ProvisionedThroughput={
         'ReadCapacityUnits': 10,
