@@ -13,12 +13,15 @@ public class EventController {
     private final EventRepository repository;
 
     EventController(EventRepository repository) {
+
         this.repository = repository;
+
     }
 
     @PostMapping(path = "/events", consumes = "application/json", produces = "application/json")
-    Event event(@RequestBody Event event) {
-        return repository.save(event);
+    public void saveEvent(@RequestBody Event event) {
+        repository.save(event);
     }
+
 
 }
