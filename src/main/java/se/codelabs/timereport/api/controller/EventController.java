@@ -35,24 +35,29 @@ public class EventController {
 
     }
 
-    @GetMapping(value = "/user/{userid}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/event/user/{userid}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Event>> getEventByUserId(@PathVariable("userid") String userid) {
         List<Event> events = repository.findByUserId(userid);
         return new ResponseEntity<List<Event>>(events, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/user/{userid}/date/{date}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/event/user/{userid}/date/{date}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Event>> getEventByUserIdAndDate(@PathVariable("userid") String userId,
                                                              @PathVariable("date") String date) {
         List<Event> events = repository.findByUserIdAndDate(userId, date);
         return new ResponseEntity<List<Event>>(events, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/date/{date}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/event/date/{date}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Event>> getEventByDate(@PathVariable("date") String date) {
         List<Event> events = repository.findByDate(date);
         return new ResponseEntity<List<Event>>(events, HttpStatus.OK);
     }
 
+    @DeleteMapping(value = "/event/delete/{id}")
+    public ResponseEntity<Object> deleteEvent(@PathVariable("id") String id) {
+        repository.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
 }
