@@ -7,6 +7,7 @@ import java.io.Serializable;
 
 
 @DynamoDBTable(tableName = "Event")
+@DynamoDBDocument
 public class Event implements Serializable {
 
     private static final long serialVersionUID = 10L;
