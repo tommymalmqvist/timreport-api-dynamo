@@ -24,13 +24,6 @@ public class Event implements Serializable {
 
     public Event() { }
 
-//    public Event(String userId, String userName, String reason, String eventDate, int hours) {
-//        this.userId = userId;
-//        this.userName = userName;
-//        this.reason = reason;
-//        this.eventDate = eventDate;
-//        this.hours = hours;
-//    }
 
     @DynamoDBHashKey(attributeName = "userid")
     public String getUserid() {
