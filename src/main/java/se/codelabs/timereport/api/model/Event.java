@@ -3,7 +3,6 @@ package se.codelabs.timereport.api.model;
 import com.amazonaws.services.dynamodbv2.datamodeling.*;
 import org.springframework.data.annotation.Id;
 
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 
@@ -15,54 +14,52 @@ public class Event implements Serializable {
     @Id
     private EventId eventId;
 
-    @NotNull
     private String userId;
     private String eventDate;
-
-    private String userName;
-    private String reason;
+    private String name;
     private int hours;
+    private String reason;
 
 
     public Event() { }
 
-    public Event(String userId, String userName, String reason, String eventDate, int hours) {
-        this.userId = userId;
-        this.userName = userName;
-//        this.eventId.setEventDate(eventDate);
-//        this.eventId.setUserId(userId);
-        this.reason = reason;
-        this.eventDate = eventDate;
-        this.hours = hours;
-    }
+//    public Event(String userId, String userName, String reason, String eventDate, int hours) {
+//        this.userId = userId;
+//        this.userName = userName;
+//        this.reason = reason;
+//        this.eventDate = eventDate;
+//        this.hours = hours;
+//    }
 
     @DynamoDBHashKey(attributeName = "userid")
-    public String getUserId() {
+    public String getUserid() {
         return eventId != null ? eventId.getUserId() : null;
     }
-    public void setUserId(String userId) {
+    public void setUserid(String userId) {
         if(eventId == null) eventId = new EventId();
         eventId.setUserId(userId);
+        this.userId = userId;
     }
 
 
-    @DynamoDBRangeKey(attributeName = "eventdate")
-    public String getEventDate() {
+    @DynamoDBRangeKey(attributeName = "date")
+    public String getDate() {
         return eventId != null ? eventId.getEventDate() : null;
     }
 
-    public void setEventDate(String eventDate) {
+    public void setDate(String eventDate) {
         if(eventId == null) eventId = new EventId();
         eventId.setEventDate(eventDate);
+        this.eventDate = eventDate;
     }
 
 
-    @DynamoDBAttribute(attributeName = "username")
-    public String getUserName() {
-        return userName;
+    @DynamoDBAttribute(attributeName = "name")
+    public String getName() {
+        return name;
     }
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @DynamoDBAttribute(attributeName = "reason")

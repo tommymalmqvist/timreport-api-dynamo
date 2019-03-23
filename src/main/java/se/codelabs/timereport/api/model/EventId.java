@@ -9,32 +9,32 @@ public class EventId implements Serializable {
     private static final long serialVersionUID = 10L;
 
     @DynamoDBHashKey(attributeName = "userid")
-    private String userId;
+    private String id;
 
     @DynamoDBRangeKey(attributeName = "eventdate")
-    private String eventDate;
+    private String date;
 
     public EventId() {}
 
-    public EventId(String userId, String eventDate) {
-        this.userId = userId;
-        this.eventDate = eventDate;
+    public EventId(String id, String date) {
+        this.id = id;
+        this.date = date;
     }
 
     public String getUserId() {
-        return userId;
+        return id;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUserId(String id) {
+        this.id = id;
     }
 
     public String getEventDate() {
-        return eventDate;
+        return date;
     }
 
-    public void setEventDate(String eventDate) {
-        this.eventDate = eventDate;
+    public void setEventDate(String date) {
+        this.date = date;
     }
 
     @Override
