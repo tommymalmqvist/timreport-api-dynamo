@@ -48,5 +48,11 @@ public class EventController {
         return new ResponseEntity<List<Event>>(events, HttpStatus.OK);
     }
 
+    @GetMapping(value = "/date/{date}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Event>> getEventByDate(@PathVariable("date") String date) {
+        List<Event> events = repository.findByDate(date);
+        return new ResponseEntity<List<Event>>(events, HttpStatus.OK);
+    }
+
 
 }

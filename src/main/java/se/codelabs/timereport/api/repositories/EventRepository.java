@@ -11,5 +11,6 @@ public interface EventRepository extends CrudRepository<Event, String> {
 
     List<Event> findByUserId(String userId);
     List<Event> findByUserIdAndDate(String userId, String date);
+    List<Event> findByDate(String date);
 
 }
