@@ -43,10 +43,11 @@ public class DynamoDBConfig {
 
     @Bean
     public DynamoDBMapper mapper() {
-        return new DynamoDBMapper(amazonDynamoDBConfig());
+        return new DynamoDBMapper(amazonDynamoDB());
     }
 
-    public AmazonDynamoDB amazonDynamoDBConfig() {
+    @Bean
+    public AmazonDynamoDB amazonDynamoDB() {
         return AmazonDynamoDBClientBuilder.standard()
                 .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(amazonAWSDynamoDBEndpointUrl, amazonAWSRegion))
                 .withCredentials(new AWSStaticCredentialsProvider(new BasicAWSCredentials(amazonAWSAccessKey, amazonAWSSecretKey)))
