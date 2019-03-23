@@ -25,6 +25,12 @@ public class DynamoDBConfig {
     @Value("${amazon.aws.secretkey}")
     private String amazonAWSSecretKey;
 
+    @Value("${amazon.aws.region}")
+    private String amazonAWSRegion;
+
+    @Value("${amazon.aws.dynamo.endpoint.url}")
+    private String amazonAWSDynamoDBEndpointUrl;
+
     public AWSCredentialsProvider amazonAWSCredentialsProvider() {
         return new AWSStaticCredentialsProvider(amazonAWSCredentials());
     }
@@ -34,21 +40,17 @@ public class DynamoDBConfig {
         return new BasicAWSCredentials(amazonAWSAccessKey, amazonAWSSecretKey);
     }
 
-    @Bean
-    public DynamoDBMapperConfig dynamoDBMapperConfig() {
-        return DynamoDBMapperConfig.DEFAULT;
-    }
 
     @Bean
-    public DynamoDBMapper dynamoDBMapper(AmazonDynamoDB amazonDynamoDB, DynamoDBMapperConfig config) {
-        return new DynamoDBMapper(amazonDynamoDB, config);
+    public DynamoDBMapper mapper() {
+        return new DynamoDBMapper(amazonDynamoDBConfig());
     }
 
-    @Bean
-    public AmazonDynamoDB amazonDynamoDB() {
+    public AmazonDynamoDB amazonDynamoDBConfig() {
         return AmazonDynamoDBClientBuilder.standard()
-        .withCredentials(new AWSStaticCredentialsProvider(new BasicAWSCredentials("local", "null"))).
-                withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration("localhost:8000", "")).build();
+                .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(amazonAWSDynamoDBEndpointUrl, amazonAWSRegion))
+                .withCredentials(new AWSStaticCredentialsProvider(new BasicAWSCredentials(amazonAWSAccessKey, amazonAWSSecretKey)))
+                .build();
     }
 
 }
