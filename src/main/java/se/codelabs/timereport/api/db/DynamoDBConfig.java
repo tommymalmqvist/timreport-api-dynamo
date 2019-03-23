@@ -31,15 +31,10 @@ public class DynamoDBConfig {
     @Value("${amazon.aws.dynamo.endpoint.url}")
     private String amazonAWSDynamoDBEndpointUrl;
 
-    public AWSCredentialsProvider amazonAWSCredentialsProvider() {
-        return new AWSStaticCredentialsProvider(amazonAWSCredentials());
-    }
-
     @Bean
     public AWSCredentials amazonAWSCredentials() {
         return new BasicAWSCredentials(amazonAWSAccessKey, amazonAWSSecretKey);
     }
-
 
     @Bean
     public DynamoDBMapper mapper() {
