@@ -24,11 +24,11 @@ public class EventController {
 
     }
 
-    @PostMapping(path = "/events", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/event", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> createEvent(@RequestBody Event event) {
         Event createdEvent = repository.save(event);
 
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{name}/{date}")
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/user/{userid}/date/{date}")
                 .buildAndExpand(createdEvent.getUserId(), createdEvent.getDate()).toUri();
 
         return ResponseEntity.created(location).build();
