@@ -16,7 +16,9 @@ public class Event implements Serializable {
     @Id
     public String id;
 
+    @JsonProperty("userid")
     private String userId;
+    @JsonProperty("username")
     private String userName;
     private String reason;
     private String date;
